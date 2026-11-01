@@ -1,0 +1,35 @@
+# Generic route examples. Keep credentials and Feishu Open IDs in environment
+# variables, never in this file.
+
+routes:
+  - id: example-http-service
+    match:
+      monitor_name: "示例HTTP服务"
+    service_name: "示例 HTTP 服务"
+    diagnosis:
+      type: http
+      targets:
+        internal:
+          url: "https://service.example.invalid/health"
+        external:
+          url: "https://service.example.invalid/health"
+    owners:
+      - name: "示例负责人"
+        feishu_user_id_env: SERVICE_REACHABILITY_FEISHU_OWNER_OPEN_ID
+
+  - id: example-tcp-service
+    match:
+      monitor_name: "示例TCP服务｜端口8000"
+    service_name: "示例 TCP 服务"
+    diagnosis:
+      type: tcp
+      host: "service.example.invalid"
+      port: 8000
+    owners:
+      - name: "示例负责人"
+        feishu_user_id_env: SERVICE_REACHABILITY_FEISHU_OWNER_OPEN_ID
+
+fallback:
+  owners:
+    - name: "告警值班负责人"
+      feishu_user_id_env: SERVICE_REACHABILITY_FEISHU_OWNER_OPEN_ID

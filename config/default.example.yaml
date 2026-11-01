@@ -1,0 +1,46 @@
+# Generic deployment template. Replace probe endpoints and environment
+# variable values in the target Hermes environment.
+
+runtime:
+  dry_run: false
+  alert_routes_path: config/alert_routes.yaml
+
+feishu:
+  enabled: false
+  webhook_env: FEISHU_WEBHOOK_URL
+  secret_env: FEISHU_SECRET
+  app_notify:
+    enabled: true
+    app_id_env: FEISHU_APP_ID
+    app_secret_env: FEISHU_APP_SECRET
+    domain_env: FEISHU_DOMAIN
+  alert_bot:
+    allowed_names:
+      - "拨测通知机器人"
+    allowed_sender_id_env: SERVICE_REACHABILITY_ALERT_BOT_ID
+    self_names:
+      - "Hermes"
+      - "service-reachability-check"
+
+probes:
+  retry_count: 3
+  retry_interval_seconds: 2
+  ssh_timeout_seconds: 10
+  command_timeout_seconds: 10
+  internal:
+    name: internal-probe
+    host: "internal-probe.example.invalid"
+    port: 22
+    user: "probe"
+    key_path_env: INTERNAL_PROBE_SSH_KEY_PATH
+  external:
+    name: external-probe
+    host: "external-probe.example.invalid"
+    port: 22
+    user: "probe"
+    key_path_env: EXTERNAL_PROBE_SSH_KEY_PATH
+
+diagnosis:
+  tcp_timeout_seconds: 5
+  http_timeout_seconds: 10
+  http_success_status: 200

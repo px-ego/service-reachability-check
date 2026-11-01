@@ -1,0 +1,5 @@
+name: service-reachability-dispatch
+version: 1.0.0
+description: Deterministically intercept Feishu reachability alerts before LLM dispatch.
+hooks:
+  - pre_gateway_dispatch

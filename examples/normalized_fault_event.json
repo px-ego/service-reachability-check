@@ -1,0 +1,6 @@
+{
+  "sender_name": "拨测通知机器人",
+  "sender_id": "configured-alert-bot-id",
+  "sender_type": "bot",
+  "text": "监控告警: [🔴 故障] 示例HTTP服务\n\n[发生故障] Request timeout\n告警时间: 2026-01-01 10:00:00"
+}
